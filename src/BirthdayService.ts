@@ -13,24 +13,9 @@ export class BirthdayService {
     smtpHost: string,
     smtpPort: number
   ) {
-    const data = fs.readFileSync(
-      path.resolve(__dirname, `../resources/${fileName}`),
-      "UTF-8"
-    );
+    const employees = this.listEmployees(fileName);
 
-    // split the contents by new line
-    const lines = data.split(/\r?\n/);
-    lines.shift();
-
-    // print all lines
-    lines.forEach((line) => {
-      const employeeData = line.split(", ");
-      const employee = new Employee(
-        employeeData[1],
-        employeeData[0],
-        employeeData[2],
-        employeeData[3]
-      );
+    employees.forEach((employee) => {
       if (employee.isBirthday(ourDate)) {
         const recipient = employee.getEmail();
         const body = "Happy Birthday, dear %NAME%!".replace(
@@ -48,6 +33,31 @@ export class BirthdayService {
         );
       }
     });
+  }
+
+  private listEmployees(fileName: string): Employee[] {
+    const data = fs.readFileSync(
+      path.resolve(__dirname, `../resources/${fileName}`),
+      "UTF-8"
+    );
+
+    const lines = data.split(/\r?\n/);
+    lines.shift();
+
+    const employees: Employee[] = [];
+
+    lines.forEach((line) => {
+      const employeeData = line.split(", ");
+      const employee = new Employee(
+        employeeData[1],
+        employeeData[0],
+        employeeData[2],
+        employeeData[3]
+      );
+      employees.push(employee);
+    });
+
+    return employees;
   }
 
   async sendMessage(
