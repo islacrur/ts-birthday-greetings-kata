@@ -1,8 +1,8 @@
 import nodemailer from "nodemailer";
 import Mail from "nodemailer/lib/mailer";
 import SMTPTransport from "nodemailer/lib/smtp-transport";
-import { fileEmployeeRepository } from "./core/infrastructure/FileEmployeeRepository";
-import { OurDate } from "./core/domain/OurDate";
+import { fileEmployeeRepository } from "../infrastructure/FileEmployeeRepository";
+import { OurDate } from "../domain/OurDate";
 
 export class BirthdayService {
   sendGreetings(
