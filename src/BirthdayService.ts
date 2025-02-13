@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 import nodemailer from "nodemailer";
 import { Employee } from "./Employee";
-import { OurDate } from "./OurDate";
+import { OurDate } from "./core/domain/OurDate";
 import Mail from "nodemailer/lib/mailer";
 import SMTPTransport from "nodemailer/lib/smtp-transport";
 
