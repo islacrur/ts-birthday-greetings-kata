@@ -2,7 +2,7 @@ import nodemailer from "nodemailer";
 import { OurDate } from "./core/OurDate/domain/OurDate";
 import Mail from "nodemailer/lib/mailer";
 import SMTPTransport from "nodemailer/lib/smtp-transport";
-import { employeeServices } from "./core/Employee/services/EmployeeServices";
+import { fileEmployeeRepository } from "./core/Employee/infrastructure/FileEmployeeRepository";
 
 export class BirthdayService {
   sendGreetings(
@@ -11,7 +11,7 @@ export class BirthdayService {
     smtpHost: string,
     smtpPort: number
   ) {
-    const employees = employeeServices.list();
+    const employees = fileEmployeeRepository.list();
 
     employees.forEach((employee) => {
       if (employee.isBirthday(ourDate)) {
