@@ -2,13 +2,14 @@ import { GreetingsEmail } from "@domain/Email";
 import { nodeMailerRepository } from "../NodeMailerRepository";
 import nodemailer from "nodemailer";
 import { Employee } from "@domain/Employee";
+import { describe, it, expect, beforeEach } from "vitest";
 
-jest.mock("nodemailer");
+vi.mock("nodemailer");
 
 describe("NodeMailerRepository", () => {
   let email: GreetingsEmail;
-  const mockSendMail = jest.fn();
-  const mockCreateTransport = jest.fn(() => ({
+  const mockSendMail = vi.fn();
+  const mockCreateTransport = vi.fn(() => ({
     sendMail: mockSendMail,
   }));
 

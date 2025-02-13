@@ -1,5 +1,6 @@
 import { GreetingsEmail } from "../Email";
 import { Employee } from "../../Employee";
+import { describe, it, expect } from "vitest";
 
 describe("GreetingsEmail", () => {
   it("should create birthday email with correct properties", () => {

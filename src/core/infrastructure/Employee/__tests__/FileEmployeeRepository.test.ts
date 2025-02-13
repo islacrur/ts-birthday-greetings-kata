@@ -1,9 +1,10 @@
 import { fileEmployeeRepository } from "../FileEmployeeRepository";
 import fs from "fs";
 import path from "path";
+import { describe, it, expect, beforeEach } from 'vitest'
 
-jest.mock("fs");
-jest.mock("path");
+vi.mock('fs')
+vi.mock('path')
 
 describe("FileEmployeeRepository", () => {
   beforeEach(() => {
@@ -12,8 +13,8 @@ describe("FileEmployeeRepository", () => {
       "Doe, John, 2008/10/08, john.doe@foobar.com\n" +
       "Smith, Jane, 1973/03/15, jane.smith@foobar.com";
 
-    (fs.readFileSync as jest.Mock).mockReturnValue(mockFileContent);
-    (path.resolve as jest.Mock).mockReturnValue("fake/path/employee_data.txt");
+    (fs.readFileSync as vi.Mock).mockReturnValue(mockFileContent);
+    (path.resolve as vi.Mock).mockReturnValue("fake/path/employee_data.txt");
   });
 
   describe("list", () => {
@@ -40,7 +41,7 @@ describe("FileEmployeeRepository", () => {
     });
 
     it("debería manejar un archivo vacío", () => {
-      (fs.readFileSync as jest.Mock).mockReturnValue(
+      (fs.readFileSync as vi.Mock).mockReturnValue(
         "last_name, first_name, date_of_birth, email"
       );
 

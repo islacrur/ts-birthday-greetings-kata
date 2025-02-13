@@ -2,6 +2,7 @@
  * NO TOCAR.
  * Simula el almacén de mensajes que hace MailHog para eliminar la dependencia con MailHog/Docker.
  */
+import { vi } from "vitest";
 
 interface Message {
   Content: {
@@ -38,7 +39,7 @@ export const startMailhog = async () => {
   // Simulamos el tiempo que tarda Docker en levantar el contenedor
   await wait(2000);
   messageStore = [];
-  jest.spyOn(require("nodemailer"), "createTransport").mockReturnValue({
+  vi.spyOn(require("nodemailer"), "createTransport").mockReturnValue({
     sendMail: async (mail: any) => {
       // Simulamos latencia de red al enviar email
       await wait(100);
@@ -51,7 +52,7 @@ export const startMailhog = async () => {
 export const stopMailHog = async () => {
   // Simulamos el tiempo que tarda Docker en detener el contenedor
   await wait(1000);
-  jest.restoreAllMocks();
+  vi.restoreAllMocks();
   messageStore = [];
 };
 
