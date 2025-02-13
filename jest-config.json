@@ -5,5 +5,10 @@
     "\\.(ts|tsx)$": "ts-jest"
   },
   "roots": ["<rootDir>/test", "<rootDir>/src"],
-  "testRegex": ".*\\.test\\.ts$"
+  "testRegex": ".*\\.test\\.ts$",
+  "moduleNameMapper": {
+    "^@domain/(.*)$": "<rootDir>/src/core/domain/$1",
+    "^@infrastructure/(.*)$": "<rootDir>/src/core/infrastructure/$1",
+    "^@services/(.*)$": "<rootDir>/src/core/services/$1"
+  }
 }

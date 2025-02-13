@@ -14,7 +14,12 @@
     "noImplicitAny": true,
     "strictNullChecks": true,
     "noUnusedLocals": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "paths": {
+      "@domain/*": ["src/core/domain/*"],
+      "@infrastructure/*": ["src/core/infrastructure/*"],
+      "@services/*": ["src/core/services/*"]
+    }
   },
   "include": ["src/**/*.ts", "test/**/*.ts"],
   "exclude": [

@@ -1,7 +1,7 @@
-import { BirthdayService } from "../../../../src/core/services/BirthdayService";
-import { OurDate } from "../../../../src/core/domain/OurDate";
-import { mockEmployeeRepository } from "../../../../src/core/infrastructure/Employee/__mocks__/MockEmployeeRepository";
-import { createMockMailerRepository } from "../../../../src/core/infrastructure/Mailer/__mocks__/MockMailerRepository";
+import { BirthdayService } from "@services/BirthdayService";
+import { OurDate } from "@domain/OurDate";
+import { mockEmployeeRepository } from "@infrastructure/Employee/__mocks__/MockEmployeeRepository";
+import { createMockMailerRepository } from "@infrastructure/Mailer/__mocks__/MockMailerRepository";
 
 describe("Acceptance", () => {
   let service: BirthdayService;
