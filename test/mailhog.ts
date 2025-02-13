@@ -2,7 +2,6 @@
  * NO TOCAR.
  * Simula el almacén de mensajes que hace MailHog para eliminar la dependencia con MailHog/Docker.
  */
-import { vi } from "vitest";
 
 interface Message {
   Content: {

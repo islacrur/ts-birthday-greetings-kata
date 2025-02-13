@@ -13,9 +13,7 @@
   },
   "devDependencies": {
     "@types/node": "~10.17.14",
-    "@types/node-fetch": "^2.5.5",
     "flush-promises": "^1.0.2",
-    "node-fetch": "^2.6.1",
     "tslint": "~5.20.1",
     "tslint-config-prettier": "^1.18.0",
     "tslint-config-standard": "^8.0.1",
