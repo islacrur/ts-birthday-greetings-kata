@@ -15,9 +15,6 @@ export class GreetingsEmail implements Email {
 
   constructor(employee: Employee) {
     this.recipient = employee.getEmail();
-    this.body = "Happy Birthday, dear %NAME%!".replace(
-      "%NAME%",
-      employee.getFirstName()
-    );
+    this.body = `Happy Birthday, dear ${employee.getFirstName()}!`;
   }
 }
