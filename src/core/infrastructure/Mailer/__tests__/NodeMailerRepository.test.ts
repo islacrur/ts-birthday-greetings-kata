@@ -6,12 +6,16 @@ import { Employee } from "@domain/Employee";
 jest.mock("nodemailer");
 
 describe("NodeMailerRepository", () => {
+  let email: GreetingsEmail;
   const mockSendMail = jest.fn();
   const mockCreateTransport = jest.fn(() => ({
     sendMail: mockSendMail,
   }));
 
   beforeEach(() => {
+    email = new GreetingsEmail(
+      new Employee("John", "Doe", "1990/01/01", "john.doe@example.com")
+    );
     (nodemailer.createTransport as jest.Mock).mockImplementation(
       mockCreateTransport
     );
@@ -20,14 +24,6 @@ describe("NodeMailerRepository", () => {
   });
 
   it("debería configurar el transporte con los valores correctos", async () => {
-    const employee = new Employee(
-      "John",
-      "Doe",
-      "1990/01/01",
-      "john.doe@example.com"
-    );
-    const email = new GreetingsEmail(employee);
-
     await nodeMailerRepository.send(email);
 
     expect(nodemailer.createTransport).toHaveBeenCalledWith({
@@ -37,14 +33,6 @@ describe("NodeMailerRepository", () => {
   });
 
   it("debería enviar el email con los parámetros correctos", async () => {
-    const employee = new Employee(
-      "John",
-      "Doe",
-      "1990/01/01",
-      "john.doe@example.com"
-    );
-    const email = new GreetingsEmail(employee);
-
     await nodeMailerRepository.send(email);
 
     expect(mockSendMail).toHaveBeenCalledWith({
@@ -56,23 +44,12 @@ describe("NodeMailerRepository", () => {
   });
 
   it("debería propagar errores del envío", async () => {
-    const employee = new Employee(
-      "John",
-      "Doe",
-      "1990/01/01",
-      "john.doe@example.com"
-    );
-    const email = new GreetingsEmail(employee);
-
     mockSendMail.mockImplementationOnce(() => {
       throw new Error("Error de envío");
     });
 
-    try {
-      await nodeMailerRepository.send(email);
-      fail("Debería haber lanzado un error");
-    } catch (error) {
-      expect(error.message).toBe("Error de envío");
-    }
+    await expect(nodeMailerRepository.send(email)).rejects.toThrow(
+      "Error de envío"
+    );
   });
 });
