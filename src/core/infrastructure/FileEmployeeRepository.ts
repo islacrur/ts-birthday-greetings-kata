@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
-import { EmployeeRepository } from "src/core/domain/Employee/EmployeeRepository";
-import { Employee } from "../domain/Employee/Employee";
+import { EmployeeRepository } from "src/core/domain/Employee";
+import { Employee } from "../domain/Employee";
 
 export const fileEmployeeRepository: EmployeeRepository = {
   list: () => {
