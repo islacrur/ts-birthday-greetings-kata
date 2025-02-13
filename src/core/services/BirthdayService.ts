@@ -4,12 +4,7 @@ import { Email } from "../domain/Email";
 import { nodeMailerRepository } from "../infrastructure/NodeMailerRepository";
 
 export class BirthdayService {
-  sendGreetings(
-    fileName: string,
-    ourDate: OurDate,
-    smtpHost: string,
-    smtpPort: number
-  ) {
+  sendGreetings(ourDate: OurDate) {
     const employees = fileEmployeeRepository.list();
 
     employees.forEach((employee) => {
