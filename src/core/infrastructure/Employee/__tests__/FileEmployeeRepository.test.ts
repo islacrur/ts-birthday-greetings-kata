@@ -1,6 +1,8 @@
 import { fileEmployeeRepository } from "../FileEmployeeRepository";
+import { OurDate } from "../../../../core/domain/OurDate";
 import fs from "fs";
 import path from "path";
+import { Mock } from "vitest";
 
 vi.mock("fs");
 vi.mock("path");
@@ -12,26 +14,31 @@ describe("FileEmployeeRepository", () => {
       "Doe, John, 2008/10/08, john.doe@foobar.com\n" +
       "Smith, Jane, 1973/03/15, jane.smith@foobar.com";
 
-    (fs.readFileSync as vi.Mock).mockReturnValue(mockFileContent);
-    (path.resolve as vi.Mock).mockReturnValue("fake/path/employee_data.txt");
+    (fs.readFileSync as Mock).mockReturnValue(mockFileContent);
+    (path.resolve as Mock).mockReturnValue("fake/path/employee_data.txt");
   });
 
-  describe("list", () => {
-    it("debería leer y parsear correctamente el archivo de empleados", () => {
-      const employees = fileEmployeeRepository.list();
+  describe("listByBirthday", () => {
+    it("debería devolver empleados que cumplen años en la fecha especificada", () => {
+      const date = new OurDate("2008/10/08");
+      const employees = fileEmployeeRepository.listByBirthday(date);
 
-      expect(employees).toHaveLength(2);
+      expect(employees).toHaveLength(1);
       expect(employees[0].getFirstName()).toBe("John");
       expect(employees[0].getLastName()).toBe("Doe");
       expect(employees[0].getEmail()).toBe("john.doe@foobar.com");
+    });
 
-      expect(employees[1].getFirstName()).toBe("Jane");
-      expect(employees[1].getLastName()).toBe("Smith");
-      expect(employees[1].getEmail()).toBe("jane.smith@foobar.com");
+    it("debería devolver una lista vacía cuando nadie cumple años", () => {
+      const date = new OurDate("2008/10/09");
+      const employees = fileEmployeeRepository.listByBirthday(date);
+
+      expect(employees).toHaveLength(0);
     });
 
     it("debería llamar a readFileSync con la ruta correcta", () => {
-      fileEmployeeRepository.list();
+      const date = new OurDate("2008/10/08");
+      fileEmployeeRepository.listByBirthday(date);
 
       expect(fs.readFileSync).toHaveBeenCalledWith(
         "fake/path/employee_data.txt",
@@ -40,11 +47,12 @@ describe("FileEmployeeRepository", () => {
     });
 
     it("debería manejar un archivo vacío", () => {
-      (fs.readFileSync as vi.Mock).mockReturnValue(
+      (fs.readFileSync as Mock).mockReturnValue(
         "last_name, first_name, date_of_birth, email"
       );
 
-      const employees = fileEmployeeRepository.list();
+      const date = new OurDate("2008/10/08");
+      const employees = fileEmployeeRepository.listByBirthday(date);
 
       expect(employees).toHaveLength(0);
     });

@@ -1,5 +1,6 @@
 import { Employee } from "./Employee";
+import { OurDate } from "../OurDate";
 
 export interface EmployeeRepository {
-  list: () => Employee[];
+  listByBirthday: (date: OurDate) => Employee[];
 }

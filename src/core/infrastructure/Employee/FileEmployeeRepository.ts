@@ -2,9 +2,10 @@ import fs from "fs";
 import path from "path";
 import { EmployeeRepository } from "src/core/domain/Employee";
 import { Employee } from "../../domain/Employee";
+import { OurDate } from "../../domain/OurDate";
 
 export const fileEmployeeRepository: EmployeeRepository = {
-  list: () => {
+  listByBirthday: (date: OurDate) => {
     const data = fs.readFileSync(
       path.resolve(__dirname, `../../../../resources/employee_data.txt`),
       "UTF-8"
@@ -23,7 +24,10 @@ export const fileEmployeeRepository: EmployeeRepository = {
         employeeData[2],
         employeeData[3]
       );
-      employees.push(employee);
+
+      if (employee.isBirthday(date)) {
+        employees.push(employee);
+      }
     });
 
     return employees;
