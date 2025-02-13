@@ -1,10 +1,8 @@
-import fs from "fs";
-import path from "path";
 import nodemailer from "nodemailer";
-import { Employee } from "./core/Employee/domain/Employee";
 import { OurDate } from "./core/OurDate/domain/OurDate";
 import Mail from "nodemailer/lib/mailer";
 import SMTPTransport from "nodemailer/lib/smtp-transport";
+import { employeeServices } from "./core/Employee/services/EmployeeServices";
 
 export class BirthdayService {
   sendGreetings(
@@ -13,7 +11,7 @@ export class BirthdayService {
     smtpHost: string,
     smtpPort: number
   ) {
-    const employees = this.listEmployees(fileName);
+    const employees = employeeServices.list(fileName);
 
     employees.forEach((employee) => {
       if (employee.isBirthday(ourDate)) {
@@ -33,31 +31,6 @@ export class BirthdayService {
         );
       }
     });
-  }
-
-  private listEmployees(fileName: string): Employee[] {
-    const data = fs.readFileSync(
-      path.resolve(__dirname, `../resources/${fileName}`),
-      "UTF-8"
-    );
-
-    const lines = data.split(/\r?\n/);
-    lines.shift();
-
-    const employees: Employee[] = [];
-
-    lines.forEach((line) => {
-      const employeeData = line.split(", ");
-      const employee = new Employee(
-        employeeData[1],
-        employeeData[0],
-        employeeData[2],
-        employeeData[3]
-      );
-      employees.push(employee);
-    });
-
-    return employees;
   }
 
   async sendMessage(
