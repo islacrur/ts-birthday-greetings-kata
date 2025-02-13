@@ -2,10 +2,11 @@ import { BirthdayService } from "@services/BirthdayService";
 import { OurDate } from "@domain/OurDate";
 import { mockEmployeeRepository } from "@infrastructure/Employee/__mocks__/MockEmployeeRepository";
 import { createMockMailerRepository } from "@infrastructure/Mailer/__mocks__/MockMailerRepository";
+import { Mock } from "vitest";
 
 describe("Acceptance", () => {
   let service: BirthdayService;
-  let sendMailSpy: vi.Mock;
+  let sendMailSpy: Mock;
 
   beforeEach(async () => {
     sendMailSpy = vi.fn();

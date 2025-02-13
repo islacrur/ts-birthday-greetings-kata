@@ -2,6 +2,7 @@ import { GreetingsEmail } from "@domain/Email";
 import { nodeMailerRepository } from "../NodeMailerRepository";
 import nodemailer from "nodemailer";
 import { Employee } from "@domain/Employee";
+import { Mock } from "vitest";
 
 vi.mock("nodemailer");
 
@@ -16,7 +17,7 @@ describe("NodeMailerRepository", () => {
     email = new GreetingsEmail(
       new Employee("John", "Doe", "1990/01/01", "john.doe@example.com")
     );
-    (nodemailer.createTransport as vi.Mock).mockImplementation(
+    (nodemailer.createTransport as Mock).mockImplementation(
       mockCreateTransport
     );
     mockSendMail.mockClear();
