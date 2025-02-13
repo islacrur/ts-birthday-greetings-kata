@@ -1,4 +1,4 @@
-import { OurDate } from "../src/core/domain/OurDate";
+import { OurDate } from "../src/core/OurDate/domain/OurDate";
 import { BirthdayService } from "../src/BirthdayService";
 import { messagesSent, startMailhog, stopMailHog } from "./mailhog";
 import flushPromises from "flush-promises";
