@@ -1,12 +1,12 @@
 import fs from "fs";
 import path from "path";
 import { EmployeeRepository } from "src/core/domain/Employee";
-import { Employee } from "../domain/Employee";
+import { Employee } from "../../domain/Employee";
 
 export const fileEmployeeRepository: EmployeeRepository = {
   list: () => {
     const data = fs.readFileSync(
-      path.resolve(__dirname, `../../../resources/employee_data.txt`),
+      path.resolve(__dirname, `../../../../resources/employee_data.txt`),
       "UTF-8"
     );
 

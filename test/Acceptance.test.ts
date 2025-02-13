@@ -1,5 +1,5 @@
-import { nodeMailerRepository } from "../src/core/infrastructure/NodeMailerRepository";
-import { fileEmployeeRepository } from "../src/core/infrastructure/FileEmployeeRepository";
+import { nodeMailerRepository } from "../src/core/infrastructure/Mailer/NodeMailerRepository";
+import { fileEmployeeRepository } from "../src/core/infrastructure/Employee/FileEmployeeRepository";
 import { OurDate } from "../src/core/domain/OurDate";
 import { BirthdayService } from "../src/core/services/BirthdayService";
 import { messagesSent, startMailhog, stopMailHog } from "./mailhog";
