@@ -21,7 +21,7 @@ export const nodeMailerRepository: MailerRepository = {
       text: email.body,
     };
 
-    deliveryMessage(message);
+    await deliveryMessage(message);
   },
 };
 
