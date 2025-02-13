@@ -4,7 +4,6 @@ import { OurDate } from "../src/core/domain/OurDate";
 import { BirthdayService } from "../src/core/services/BirthdayService";
 import { messagesSent, startMailhog, stopMailHog } from "./mailhog";
 import flushPromises from "flush-promises";
-import { describe, it, expect, beforeEach, afterEach } from "vitest";
 
 describe("Acceptance", () => {
   let service: BirthdayService;

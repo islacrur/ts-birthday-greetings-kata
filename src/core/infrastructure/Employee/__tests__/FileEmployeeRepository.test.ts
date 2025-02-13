@@ -1,10 +1,9 @@
 import { fileEmployeeRepository } from "../FileEmployeeRepository";
 import fs from "fs";
 import path from "path";
-import { describe, it, expect, beforeEach } from 'vitest'
 
-vi.mock('fs')
-vi.mock('path')
+vi.mock("fs");
+vi.mock("path");
 
 describe("FileEmployeeRepository", () => {
   beforeEach(() => {

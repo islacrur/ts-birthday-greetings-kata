@@ -19,7 +19,8 @@
       "@domain/*": ["src/core/domain/*"],
       "@infrastructure/*": ["src/core/infrastructure/*"],
       "@services/*": ["src/core/services/*"]
-    }
+    },
+    "types": ["vitest/globals"]
   },
   "include": ["src/**/*.ts", "test/**/*.ts"],
   "exclude": [
