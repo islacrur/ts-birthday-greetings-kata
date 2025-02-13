@@ -1,6 +1,6 @@
 import { fileEmployeeRepository } from "../infrastructure/FileEmployeeRepository";
 import { OurDate } from "../domain/OurDate";
-import { Email } from "../domain/Email";
+import { GreetingsEmail } from "../domain/Email";
 import { nodeMailerRepository } from "../infrastructure/NodeMailerRepository";
 
 export class BirthdayService {
@@ -9,9 +9,9 @@ export class BirthdayService {
 
     employees.forEach((employee) => {
       if (employee.isBirthday(ourDate)) {
-        const email = new Email(employee);
+        const greetingsEmail = new GreetingsEmail(employee);
 
-        nodeMailerRepository.send("sender@here.com", email);
+        nodeMailerRepository.send("sender@here.com", greetingsEmail);
       }
     });
   }

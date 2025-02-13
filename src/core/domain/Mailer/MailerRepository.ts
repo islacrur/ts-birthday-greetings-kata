@@ -1,5 +1,5 @@
-import { Email } from "../Email";
+import { GreetingsEmail } from "../Email";
 
 export interface MailerRepository {
-  send(sender: string, email: Email): Promise<void>;
+  send(sender: string, email: GreetingsEmail): Promise<void>;
 }
