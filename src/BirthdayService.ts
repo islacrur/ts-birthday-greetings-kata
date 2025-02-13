@@ -6,12 +6,12 @@ import { employeeServices } from "./core/Employee/services/EmployeeServices";
 
 export class BirthdayService {
   sendGreetings(
-    fileName: string,
+    _: string,
     ourDate: OurDate,
     smtpHost: string,
     smtpPort: number
   ) {
-    const employees = employeeServices.list(fileName);
+    const employees = employeeServices.list();
 
     employees.forEach((employee) => {
       if (employee.isBirthday(ourDate)) {
