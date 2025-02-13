@@ -1,4 +1,4 @@
-import { OurDate } from "./OurDate";
+import { OurDate } from "../domain/OurDate";
 
 export class Employee {
   private readonly _firstName: string;

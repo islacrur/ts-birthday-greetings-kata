@@ -1,5 +1,5 @@
-import { OurDate } from "../OurDate";
-import { Employee } from "../Employee";
+import { OurDate } from "../../domain/OurDate";
+import { Employee } from "../../Employee/Employee";
 
 describe("Employee", () => {
   it("is birthday", () => {
