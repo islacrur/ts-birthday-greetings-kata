@@ -1,17 +1,22 @@
-import { fileEmployeeRepository } from "../infrastructure/FileEmployeeRepository";
+import { EmployeeRepository } from "../domain/Employee";
+import { MailerRepository } from "../domain/Mailer";
 import { OurDate } from "../domain/OurDate";
 import { GreetingsEmail } from "../domain/Email";
-import { nodeMailerRepository } from "../infrastructure/NodeMailerRepository";
 
 export class BirthdayService {
+  constructor(
+    private employeeRepository: EmployeeRepository,
+    private mailerRepository: MailerRepository
+  ) {}
+
   sendGreetings(ourDate: OurDate) {
-    const employees = fileEmployeeRepository.list();
+    const employees = this.employeeRepository.list();
 
     employees.forEach((employee) => {
       if (employee.isBirthday(ourDate)) {
         const greetingsEmail = new GreetingsEmail(employee);
 
-        nodeMailerRepository.send(greetingsEmail);
+        this.mailerRepository.send(greetingsEmail);
       }
     });
   }
