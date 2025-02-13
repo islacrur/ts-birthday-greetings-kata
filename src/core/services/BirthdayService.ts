@@ -11,7 +11,7 @@ export class BirthdayService {
       if (employee.isBirthday(ourDate)) {
         const greetingsEmail = new GreetingsEmail(employee);
 
-        nodeMailerRepository.send("sender@here.com", greetingsEmail);
+        nodeMailerRepository.send(greetingsEmail);
       }
     });
   }

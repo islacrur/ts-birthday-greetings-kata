@@ -1,1 +1,1 @@
-export { GreetingsEmail } from "./Email";
+export { Email, GreetingsEmail } from "./Email";

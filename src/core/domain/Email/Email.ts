@@ -1,15 +1,17 @@
 import { Employee } from "../Employee";
 
-interface Email {
+export interface Email {
+  sender: string;
   recipient: string;
   body: string;
   subject: string;
 }
 
 export class GreetingsEmail implements Email {
+  readonly sender: string = "sender@here.com";
+  readonly subject: string = "Happy Birthday!";
   readonly recipient: string;
   readonly body: string;
-  readonly subject: string;
 
   constructor(employee: Employee) {
     this.recipient = employee.getEmail();
@@ -17,6 +19,5 @@ export class GreetingsEmail implements Email {
       "%NAME%",
       employee.getFirstName()
     );
-    this.subject = "Happy Birthday!";
   }
 }
