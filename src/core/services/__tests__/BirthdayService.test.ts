@@ -1,31 +1,18 @@
 import { BirthdayService } from "../../../../src/core/services/BirthdayService";
 import { OurDate } from "../../../../src/core/domain/OurDate";
-import { EmployeeRepository } from "../../../../src/core/domain/Employee/EmployeeRepository";
-import { MailerRepository } from "../../../../src/core/domain/Mailer/MailerRepository";
-import { Employee } from "../../../../src/core/domain/Employee";
+import { mockEmployeeRepository } from "../../../../src/core/infrastructure/Employee/__mocks__/MockEmployeeRepository";
+import { createMockMailerRepository } from "../../../../src/core/infrastructure/Mailer/__mocks__/MockMailerRepository";
 
 describe("Acceptance", () => {
   let service: BirthdayService;
-  let mockedEmployeeRepository: EmployeeRepository;
-  let mockedMailerRepository: MailerRepository;
   let sendMailSpy: jest.Mock;
 
   beforeEach(async () => {
-    mockedEmployeeRepository = {
-      list: () => [
-        new Employee("John", "Doe", "2008/10/08", "john.doe@foobar.com"),
-        new Employee("Jane", "Smith", "1973/03/15", "jane.smith@foobar.com"),
-      ],
-    };
-
     sendMailSpy = jest.fn();
-    mockedMailerRepository = {
-      send: sendMailSpy,
-    };
 
     service = new BirthdayService(
-      mockedEmployeeRepository,
-      mockedMailerRepository
+      mockEmployeeRepository,
+      createMockMailerRepository(sendMailSpy)
     );
   });
 
