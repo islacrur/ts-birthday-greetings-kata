@@ -14,22 +14,11 @@ export const fileEmployeeRepository: EmployeeRepository = {
     const lines = data.split(/\r?\n/);
     lines.shift();
 
-    const employees: Employee[] = [];
-
-    lines.forEach((line) => {
-      const employeeData = line.split(", ");
-      const employee = new Employee(
-        employeeData[1],
-        employeeData[0],
-        employeeData[2],
-        employeeData[3]
-      );
-
-      if (employee.isBirthday(date)) {
-        employees.push(employee);
-      }
-    });
-
-    return employees;
+    return lines
+      .map((line) => {
+        const [lastName, firstName, dateOfBirth, email] = line.split(", ");
+        return new Employee(firstName, lastName, dateOfBirth, email);
+      })
+      .filter((employee) => employee.isBirthday(date));
   },
 };
