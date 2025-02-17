@@ -16,8 +16,8 @@ export const fileEmployeeRepository: EmployeeRepository = {
 
     return lines
       .map((line) => {
-        const [lastName, firstName, dateOfBirth, email] = line.split(", ");
-        return new Employee(firstName, lastName, dateOfBirth, email);
+        const [lastName, firstName, birthDate, email] = line.split(", ");
+        return new Employee(firstName, lastName, birthDate, email);
       })
       .filter((employee) => employee.isBirthday(date));
   },
