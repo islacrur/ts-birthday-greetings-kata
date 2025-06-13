@@ -1,8 +1,8 @@
 import fs from "fs";
 import path from "path";
 import nodemailer from "nodemailer";
-import { Employee } from "./contextos/core/employee/domain/Employee";
-import { OurDate } from "./OurDate";
+import { Employee } from "../domain/Employee";
+import { OurDate } from "../../../../OurDate";
 import Mail from "nodemailer/lib/mailer";
 import SMTPTransport from "nodemailer/lib/smtp-transport";
 
