@@ -8,8 +8,6 @@ import { NodemailerMailRepository } from "src/contextos/core/employee/infrastruc
 import { MailRepository } from "src/contextos/core/employee/domain/MailRepository";
 
 describe("Acceptance", () => {
-  const SMTP_PORT = 1025;
-  const SMTP_URL = "127.0.0.1";
   let employeeRepository: EmployeeRepository;
   let mailRepository: MailRepository;
   let service: BirthdayService;
@@ -26,7 +24,7 @@ describe("Acceptance", () => {
   });
 
   it("base scenario", async () => {
-    service.sendGreetings(new OurDate("2008/10/08"), SMTP_URL, SMTP_PORT);
+    service.sendGreetings(new OurDate("2008/10/08"));
     await flushPromises();
 
     const messages = await messagesSent();
@@ -40,7 +38,7 @@ describe("Acceptance", () => {
   });
 
   it("will not send emails when nobodys birthday", async () => {
-    service.sendGreetings(new OurDate("2008/01/01"), SMTP_URL, SMTP_PORT);
+    service.sendGreetings(new OurDate("2008/01/01"));
     await flushPromises();
 
     const messages = await messagesSent();

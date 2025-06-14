@@ -10,12 +10,12 @@ export class BirthdayService {
     private mailRepository: MailRepository
   ) {}
 
-  sendGreetings(ourDate: OurDate, smtpHost: string, smtpPort: number) {
+  sendGreetings(ourDate: OurDate) {
     const listEmployeesByBirthday: Employee[] =
       this.employeeRepository.getEmployees(ourDate);
 
     listEmployeesByBirthday.forEach((employee) => {
-      this.mailRepository.sendMail(employee, smtpHost, smtpPort);
+      this.mailRepository.sendMail(employee);
     });
   }
 }
