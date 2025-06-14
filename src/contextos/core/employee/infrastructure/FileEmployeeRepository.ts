@@ -5,7 +5,7 @@ import fs from "fs";
 import path from "path";
 import { OurDate } from "src/contextos/core/employee/domain/OurDate";
 
-export class ApiEmployeeRepository implements EmployeeRepository {
+export class FileEmployeeRepository implements EmployeeRepository {
   getEmployees(ourDate: OurDate): Employee[] {
     const data = fs.readFileSync(
       path.resolve(__dirname, `../resources/employee_data.txt`),

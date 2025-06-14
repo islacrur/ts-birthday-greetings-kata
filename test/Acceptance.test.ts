@@ -1,10 +1,10 @@
-import { ApiEmployeeRepository } from "src/contextos/core/employee/infrastructure/FileEmployeeRepository";
+import { FileEmployeeRepository } from "src/contextos/core/employee/infrastructure/FileEmployeeRepository";
 import { OurDate } from "../src/contextos/core/employee/domain/OurDate";
 import { BirthdayService } from "../src/contextos/core/employee/service/BirthdayService";
 import { messagesSent, startMailhog, stopMailHog } from "./mailhog";
 import flushPromises from "flush-promises";
 import { EmployeeRepository } from "src/contextos/core/employee/domain/EmployeeRepository";
-import { ApiMailRepository } from "src/contextos/core/employee/infrastructure/NodemailerMailRepository";
+import { NodemailerMailRepository } from "src/contextos/core/employee/infrastructure/NodemailerMailRepository";
 import { MailRepository } from "src/contextos/core/employee/domain/MailRepository";
 
 describe("Acceptance", () => {
@@ -16,8 +16,8 @@ describe("Acceptance", () => {
 
   beforeEach(async () => {
     await startMailhog();
-    employeeRepository = new ApiEmployeeRepository();
-    mailRepository = new ApiMailRepository();
+    employeeRepository = new FileEmployeeRepository();
+    mailRepository = new NodemailerMailRepository();
     service = new BirthdayService(employeeRepository, mailRepository);
   });
 

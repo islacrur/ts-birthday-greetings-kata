@@ -4,7 +4,7 @@ import nodemailer from "nodemailer";
 import Mail from "nodemailer/lib/mailer";
 import SMTPTransport from "nodemailer/lib/smtp-transport";
 
-export class ApiMailRepository implements MailRepository {
+export class NodemailerMailRepository implements MailRepository {
   sendMail(employee: Employee, smtpHost: string, smtpPort: number): void {
     const recipient = employee.getEmail();
     const body = "Happy Birthday, dear %NAME%!".replace(
