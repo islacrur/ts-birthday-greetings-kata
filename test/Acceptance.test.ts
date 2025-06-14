@@ -1,10 +1,10 @@
-import { ApiEmployeeRepository } from "src/contextos/core/employee/infrastructure/ApiEmployeeRepository";
+import { ApiEmployeeRepository } from "src/contextos/core/employee/infrastructure/FileEmployeeRepository";
 import { OurDate } from "../src/contextos/core/employee/domain/OurDate";
 import { BirthdayService } from "../src/contextos/core/employee/service/BirthdayService";
 import { messagesSent, startMailhog, stopMailHog } from "./mailhog";
 import flushPromises from "flush-promises";
 import { EmployeeRepository } from "src/contextos/core/employee/domain/EmployeeRepository";
-import { ApiMailRepository } from "src/contextos/core/employee/infrastructure/ApiMailRepository";
+import { ApiMailRepository } from "src/contextos/core/employee/infrastructure/NodemailerMailRepository";
 import { MailRepository } from "src/contextos/core/employee/domain/MailRepository";
 
 describe("Acceptance", () => {
