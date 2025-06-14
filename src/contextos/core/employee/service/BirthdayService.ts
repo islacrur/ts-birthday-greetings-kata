@@ -7,21 +7,25 @@ import Mail from "nodemailer/lib/mailer";
 import SMTPTransport from "nodemailer/lib/smtp-transport";
 
 export class BirthdayService {
+  getEmployees(fileName: string) {
+    const data = fs.readFileSync(
+      path.resolve(__dirname, `../resources/${fileName}`),
+      "UTF-8"
+    );
+    // split the contents by new line
+    const lines = data.split(/\r?\n/);
+    lines.shift();
+
+    return lines;
+  }
+
   sendGreetings(
     fileName: string,
     ourDate: OurDate,
     smtpHost: string,
     smtpPort: number
   ) {
-    const data = fs.readFileSync(
-      path.resolve(__dirname, `../resources/${fileName}`),
-      "UTF-8"
-    );
-
-    // split the contents by new line
-    const lines = data.split(/\r?\n/);
-    lines.shift();
-
+    const lines = this.getEmployees(fileName);
     // print all lines
     lines.forEach((line) => {
       const employeeData = line.split(", ");
