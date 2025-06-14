@@ -1,3 +1,5 @@
+import { Employee } from "./Employee";
+
 export interface EmployeeRepository {
-  getEmployees(fileName: string): string[];
+  getEmployees(fileName: string): Employee[];
 }

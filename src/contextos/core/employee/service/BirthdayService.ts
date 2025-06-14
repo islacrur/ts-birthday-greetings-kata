@@ -8,17 +8,6 @@ import SMTPTransport from "nodemailer/lib/smtp-transport";
 import { EmployeeRepository } from "../domain/EmployeeRepository";
 
 export class BirthdayService {
-  getEmployees(fileName: string) {
-    const data = fs.readFileSync(
-      path.resolve(__dirname, `../resources/${fileName}`),
-      "UTF-8"
-    );
-    // split the contents by new line
-    const lines = data.split(/\r?\n/);
-    lines.shift();
-
-    return lines;
-  }
   constructor(private employeeRepository: EmployeeRepository) {}
   sendGreetings(
     fileName: string,
