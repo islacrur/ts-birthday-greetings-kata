@@ -26,12 +26,7 @@ describe("Acceptance", () => {
   });
 
   it("base scenario", async () => {
-    service.sendGreetings(
-      "employee_data.txt",
-      new OurDate("2008/10/08"),
-      SMTP_URL,
-      SMTP_PORT
-    );
+    service.sendGreetings(new OurDate("2008/10/08"), SMTP_URL, SMTP_PORT);
     await flushPromises();
 
     const messages = await messagesSent();
@@ -45,12 +40,7 @@ describe("Acceptance", () => {
   });
 
   it("will not send emails when nobodys birthday", async () => {
-    service.sendGreetings(
-      "employee_data.txt",
-      new OurDate("2008/01/01"),
-      SMTP_URL,
-      SMTP_PORT
-    );
+    service.sendGreetings(new OurDate("2008/01/01"), SMTP_URL, SMTP_PORT);
     await flushPromises();
 
     const messages = await messagesSent();

@@ -6,9 +6,9 @@ import path from "path";
 import { OurDate } from "src/contextos/core/employee/domain/OurDate";
 
 export class ApiEmployeeRepository implements EmployeeRepository {
-  getEmployees(fileName: string, ourDate: OurDate): Employee[] {
+  getEmployees(ourDate: OurDate): Employee[] {
     const data = fs.readFileSync(
-      path.resolve(__dirname, `../resources/${fileName}`),
+      path.resolve(__dirname, `../resources/employee_data.txt`),
       "UTF-8"
     );
     const lines = data.split(/\r?\n/);
