@@ -3,9 +3,10 @@ import { Employee } from "../domain/Employee";
 
 import fs from "fs";
 import path from "path";
+import { OurDate } from "src/contextos/core/employee/domain/OurDate";
 
 export class ApiEmployeeRepository implements EmployeeRepository {
-  getEmployees(fileName: string): Employee[] {
+  getEmployees(fileName: string, ourDate: OurDate): Employee[] {
     const data = fs.readFileSync(
       path.resolve(__dirname, `../resources/${fileName}`),
       "UTF-8"
@@ -21,8 +22,11 @@ export class ApiEmployeeRepository implements EmployeeRepository {
         employeeData[2],
         employeeData[3]
       );
-      employeeArray.push(employee);
+      if (employee.isBirthday(ourDate)) {
+        employeeArray.push(employee);
+      }
     });
+
     return employeeArray;
   }
 }

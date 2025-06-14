@@ -1,11 +1,28 @@
 import nodemailer from "nodemailer";
-import { OurDate } from "../../../../OurDate";
+import { OurDate } from "../domain/OurDate";
 import Mail from "nodemailer/lib/mailer";
 import SMTPTransport from "nodemailer/lib/smtp-transport";
 import { EmployeeRepository } from "../domain/EmployeeRepository";
 import { Employee } from "../domain/Employee";
 
 export class BirthdayService {
+  sendMail(employee: Employee, smtpHost: string, smtpPort: number) {
+    const recipient = employee.getEmail();
+    const body = "Happy Birthday, dear %NAME%!".replace(
+      "%NAME%",
+      employee.getFirstName()
+    );
+    const subject = "Happy Birthday!";
+    this.sendMessage(
+      smtpHost,
+      smtpPort,
+      "sender@here.com",
+      subject,
+      body,
+      recipient
+    );
+  }
+
   constructor(private employeeRepository: EmployeeRepository) {}
   sendGreetings(
     fileName: string,
@@ -13,26 +30,10 @@ export class BirthdayService {
     smtpHost: string,
     smtpPort: number
   ) {
-    const employees: Employee[] =
-      this.employeeRepository.getEmployees(fileName);
-    // print all lines
-    employees.forEach((employee) => {
-      if (employee.isBirthday(ourDate)) {
-        const recipient = employee.getEmail();
-        const body = "Happy Birthday, dear %NAME%!".replace(
-          "%NAME%",
-          employee.getFirstName()
-        );
-        const subject = "Happy Birthday!";
-        this.sendMessage(
-          smtpHost,
-          smtpPort,
-          "sender@here.com",
-          subject,
-          body,
-          recipient
-        );
-      }
+    const listEmployeesByBirthday: Employee[] =
+      this.employeeRepository.getEmployees(fileName, ourDate);
+    listEmployeesByBirthday.forEach((employee) => {
+      this.sendMail(employee, smtpHost, smtpPort);
     });
   }
 

@@ -1,4 +1,4 @@
-import { OurDate } from "../src/OurDate";
+import { OurDate } from "../src/contextos/core/employee/domain/OurDate";
 import { Employee } from "../src/contextos/core/employee/domain/Employee";
 
 describe("Employee", () => {

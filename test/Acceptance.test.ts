@@ -1,5 +1,5 @@
 import { ApiEmployeeRepository } from "src/contextos/core/employee/infrastructure/ApiEmployeeRepository";
-import { OurDate } from "../src/OurDate";
+import { OurDate } from "../src/contextos/core/employee/domain/OurDate";
 import { BirthdayService } from "../src/contextos/core/employee/service/BirthdayService";
 import { messagesSent, startMailhog, stopMailHog } from "./mailhog";
 import flushPromises from "flush-promises";
