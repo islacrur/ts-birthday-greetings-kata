@@ -5,9 +5,7 @@ import Mail from "nodemailer/lib/mailer";
 import SMTPTransport from "nodemailer/lib/smtp-transport";
 
 export class NodemailerMailRepository implements MailRepository {
-  smtpHost: string;
-  smtpPort: number;
-  constructor(smtpHost: string, smtpPort: number) {}
+  constructor(private smtpHost: string, private smtpPort: number) {}
   sendMail(employee: Employee): void {
     const recipient = employee.getEmail();
     const body = "Happy Birthday, dear %NAME%!".replace(
