@@ -5,8 +5,9 @@ import Mail from "nodemailer/lib/mailer";
 import SMTPTransport from "nodemailer/lib/smtp-transport";
 
 export class NodemailerMailRepository implements MailRepository {
-  SMTP_PORT = 1025;
-  SMTP_URL = "127.0.0.1";
+  smtpHost: string;
+  smtpPort: number;
+  constructor(smtpHost: string, smtpPort: number) {}
   sendMail(employee: Employee): void {
     const recipient = employee.getEmail();
     const body = "Happy Birthday, dear %NAME%!".replace(
@@ -14,27 +15,18 @@ export class NodemailerMailRepository implements MailRepository {
       employee.getFirstName()
     );
     const subject = "Happy Birthday!";
-    this.sendMessage(
-      this.SMTP_URL,
-      this.SMTP_PORT,
-      "sender@here.com",
-      subject,
-      body,
-      recipient
-    );
+    this.sendMessage("sender@here.com", subject, body, recipient);
   }
 
   async sendMessage(
-    smtpHost: string,
-    smtpPort: number,
     sender: string,
     subject: string,
     body: string,
     recipient: string
   ) {
     const message = {
-      host: smtpHost,
-      port: smtpPort,
+      host: this.smtpHost,
+      port: this.smtpPort,
       from: sender,
       to: [recipient],
       subject,
