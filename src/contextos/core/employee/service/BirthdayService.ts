@@ -1,11 +1,9 @@
-import fs from "fs";
-import path from "path";
 import nodemailer from "nodemailer";
-import { Employee } from "../domain/Employee";
 import { OurDate } from "../../../../OurDate";
 import Mail from "nodemailer/lib/mailer";
 import SMTPTransport from "nodemailer/lib/smtp-transport";
 import { EmployeeRepository } from "../domain/EmployeeRepository";
+import { Employee } from "../domain/Employee";
 
 export class BirthdayService {
   constructor(private employeeRepository: EmployeeRepository) {}
@@ -15,17 +13,10 @@ export class BirthdayService {
     smtpHost: string,
     smtpPort: number
   ) {
-    const lines = this.employeeRepository.getEmployees(fileName);
-
+    const employees: Employee[] =
+      this.employeeRepository.getEmployees(fileName);
     // print all lines
-    lines.forEach((line) => {
-      const employeeData = line.split(", ");
-      const employee = new Employee(
-        employeeData[1],
-        employeeData[0],
-        employeeData[2],
-        employeeData[3]
-      );
+    employees.forEach((employee) => {
       if (employee.isBirthday(ourDate)) {
         const recipient = employee.getEmail();
         const body = "Happy Birthday, dear %NAME%!".replace(

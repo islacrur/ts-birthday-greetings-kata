@@ -23,7 +23,6 @@ export class ApiEmployeeRepository implements EmployeeRepository {
       );
       employeeArray.push(employee);
     });
-
     return employeeArray;
   }
 }
