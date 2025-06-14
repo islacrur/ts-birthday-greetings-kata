@@ -1,16 +1,20 @@
+import { ApiEmployeeRepository } from "src/contextos/core/employee/infrastructure/ApiEmployeeRepository";
 import { OurDate } from "../src/OurDate";
 import { BirthdayService } from "../src/contextos/core/employee/service/BirthdayService";
 import { messagesSent, startMailhog, stopMailHog } from "./mailhog";
 import flushPromises from "flush-promises";
+import { EmployeeRepository } from "src/contextos/core/employee/domain/EmployeeRepository";
 
 describe("Acceptance", () => {
   const SMTP_PORT = 1025;
   const SMTP_URL = "127.0.0.1";
+  let employeeRepository: EmployeeRepository;
   let service: BirthdayService;
 
   beforeEach(async () => {
     await startMailhog();
-    service = new BirthdayService();
+    employeeRepository = new ApiEmployeeRepository();
+    service = new BirthdayService(employeeRepository);
   });
 
   afterEach(async () => {

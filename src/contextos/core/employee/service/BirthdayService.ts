@@ -5,6 +5,7 @@ import { Employee } from "../domain/Employee";
 import { OurDate } from "../../../../OurDate";
 import Mail from "nodemailer/lib/mailer";
 import SMTPTransport from "nodemailer/lib/smtp-transport";
+import { EmployeeRepository } from "../domain/EmployeeRepository";
 
 export class BirthdayService {
   getEmployees(fileName: string) {
@@ -18,14 +19,15 @@ export class BirthdayService {
 
     return lines;
   }
-
+  constructor(private employeeRepository: EmployeeRepository) {}
   sendGreetings(
     fileName: string,
     ourDate: OurDate,
     smtpHost: string,
     smtpPort: number
   ) {
-    const lines = this.getEmployees(fileName);
+    const lines = this.employeeRepository.getEmployees(fileName);
+
     // print all lines
     lines.forEach((line) => {
       const employeeData = line.split(", ");
